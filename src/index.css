@@ -1,0 +1,233 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   BSA design tokens
+   Every colour, font, radius and spacing value used by components lives
+   here. Tailwind v4 turns each token into utilities (e.g. --color-navy →
+   bg-navy / text-navy) and exposes it as a CSS variable (var(--color-navy)).
+   ========================================================================== */
+
+@theme {
+  /* Colour — hierarchy: navy > white > gold > green */
+  --color-navy: #0d0a3b;
+  --color-navy-800: #17134f; /* raised panels on navy */
+  --color-navy-700: #252063; /* borders / dividers on navy */
+  --color-gold: #d6a63a;
+  --color-gold-hover: #c8962c;
+  --color-gold-deep: #8a6516; /* gold-toned TEXT on light bg (5.3:1). Never use --color-gold for text on white (2.2:1). */
+  --color-gold-soft: #fbf4e4;
+  --color-gold-display: #b08426; /* gold for LARGE headings on light bg (3.2:1, passes 3:1 large-text) */
+  --color-green: #16845b;
+  --color-green-deep: #12704d;
+  --color-green-soft: #e8f4ee;
+  --color-white: #ffffff;
+  --color-background: #f6f7fb;
+  --color-text: #17172a;
+  --color-muted: #66677a;
+  --color-on-navy-muted: #c9d0e4;
+  --color-border: #e4e6ef;
+  --color-error: #b42318;
+  --color-error-soft: #fdecea;
+
+  /* Typography */
+  --font-heading: Georgia, 'Times New Roman', Times, serif;
+  --font-sans:
+    'Work Sans Variable', 'Work Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    sans-serif;
+
+  /* Fluid type scale (min at ~360px, max at ~1280px) */
+  --text-display: clamp(2.375rem, 1.6rem + 3vw, 4.25rem);
+  --text-display--line-height: 1.04;
+  --text-h1: clamp(2.25rem, 1.7rem + 2.4vw, 3.5rem);
+  --text-h1--line-height: 1.1;
+  --text-h2: clamp(1.875rem, 1.5rem + 1.6vw, 2.75rem);
+  --text-h2--line-height: 1.15;
+  --text-h3: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --text-h3--line-height: 1.25;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.4;
+
+  /* Layout */
+  --container-site: 76rem; /* 1216px content width */
+  --container-narrow: 48rem;
+  --spacing-gutter: clamp(1rem, 0.5rem + 2.5vw, 2rem);
+  --spacing-section: clamp(4rem, 2.5rem + 6vw, 7rem);
+  --spacing-section-sm: clamp(2.5rem, 1.75rem + 3vw, 4rem);
+  --spacing-header: 4.5rem;
+  --spacing-header-lg: 5.5rem;
+
+  /* Radius — restrained */
+  --radius-button: 0.375rem;
+  --radius-card: 0.625rem;
+  --radius-media: 0.75rem;
+
+  /* Elevation — used sparingly */
+  --shadow-card: 0 1px 2px rgb(13 10 59 / 0.04), 0 8px 24px -12px rgb(13 10 59 / 0.12);
+  --shadow-raised: 0 2px 4px rgb(13 10 59 / 0.06), 0 16px 40px -16px rgb(13 10 59 / 0.22);
+
+  /* Motion */
+  --default-transition-duration: 200ms;
+  --default-transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+  --duration-slow: 350ms;
+  --ease-out-soft: cubic-bezier(0.2, 0, 0, 1);
+  --animate-fade-up: fade-up 700ms var(--ease-out-soft) both;
+  --animate-fade-in: fade-in 900ms var(--ease-out-soft) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  :root {
+    /* Focus ring colour flips on dark surfaces via .surface-dark */
+    --focus-ring: var(--color-navy);
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--spacing-header) + 1rem);
+
+    @media (width >= 64rem) {
+      scroll-padding-top: calc(var(--spacing-header-lg) + 1rem);
+    }
+  }
+
+  body {
+    @apply bg-white font-sans text-base leading-relaxed text-text antialiased;
+    overflow-x: clip;
+  }
+
+  /* Headings: Georgia, natural sentence case. No text-transform. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-heading font-bold tracking-tight text-navy;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Lock page scroll while a modal dialog (mobile menu) is open */
+  html:has(dialog[open]:modal) {
+    overflow: hidden;
+  }
+
+  img,
+  video {
+    @apply h-auto max-w-full;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    @apply bg-gold text-navy;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Shared utilities
+   ========================================================================== */
+
+/* Apply to any navy section so focus rings and headings stay visible. */
+@utility surface-dark {
+  --focus-ring: var(--color-gold);
+  background-color: var(--color-navy);
+  color: var(--color-white);
+
+  & :where(h1, h2, h3, h4) {
+    color: var(--color-white);
+  }
+}
+
+/* Small uppercase label — the only intentional uppercase treatment. */
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  line-height: var(--text-eyebrow--line-height);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/*
+ * Hero visual area (desktop): starts at 45% of the container's content box
+ * and bleeds to the viewport's right edge, so the scene dominates the right
+ * side at every width while the text stays aligned to the site container.
+ */
+@utility hero-visual-left {
+  left: calc(
+    max(0px, (100% - var(--container-site)) / 2) + var(--spacing-gutter) +
+      (min(100%, var(--container-site)) - 2 * var(--spacing-gutter)) * 0.45
+  );
+}
+
+/* Fades the hero cityscape into whatever sits behind it (no seam). */
+@utility hero-scene-fade {
+  --scene-fade: linear-gradient(to bottom, transparent 0%, #000 45%);
+  mask-image: var(--scene-fade);
+  -webkit-mask-image: var(--scene-fade);
+
+  @media (width >= 64rem) {
+    --scene-fade: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.35) 16%, #000 42%);
+  }
+}
+
+/*
+ * Scroll reveal: a gentle fade-up as a block enters the viewport. CSS-only
+ * (scroll-driven animation), so browsers without support simply show the
+ * content, and it is skipped entirely for reduced-motion users.
+ */
+@utility reveal {
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+  }
+}
+
+/* Short gold rule used beside/under section headings. */
+@utility gold-rule {
+  display: inline-block;
+  width: 2.75rem;
+  height: 2px;
+  background-color: var(--color-gold);
+  flex-shrink: 0;
+}
