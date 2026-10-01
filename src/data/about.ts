@@ -13,8 +13,8 @@ export const about = {
     heading: { lead: 'A story of resilience, community and', highlight: 'service.' },
     body: 'Born in the north, raised with a deep connection to Ogbomoso, and building here since 2003.',
     portrait: {
-      ...assets.portrait.primary,
-      alt: 'Booda Sunday Adeyemo smiling, hands clasped, wearing black traditional attire and a striped cap',
+      ...assets.portrait.independenceCutout,
+      alt: 'Booda Sunday Adeyemo smiling, hands in his pockets, wearing a sky-blue kaftan and a blue patterned cap',
     },
     backdrop: { ...assets.cityscape, alt: '' },
   },
@@ -42,8 +42,8 @@ export const about = {
       'He had his primary education at Model Primary School, Suleja, and his secondary education at Bishop James Yisa Memorial Secondary School, also in Suleja. In 2003, he came to Ogbomoso for good, to study Electrical Electronics Engineering at Ladoke Akintola University of Technology (LAUTECH). He has been rooted in the community since.',
     ],
     image: {
-      ...assets.community,
-      alt: 'A view over Ogbomoso rooftops towards a rocky hill at sunset',
+      ...assets.lautechGate,
+      alt: 'The front gate of Ladoke Akintola University of Technology (LAUTECH), Ogbomoso',
     },
   },
 
@@ -94,10 +94,11 @@ export const about = {
       'He is contesting for the Ogbomoso South State Constituency seat under the Nigeria Democratic Congress (NDC).',
     ],
     image: {
-      src: '/assets/images/community-outreach-2.jpg',
-      width: 1536,
-      height: 2048,
-      alt: 'Residents gathered outdoors listening to a speaker',
+      ...assets.portrait.independenceDesk,
+      alt: 'Booda Sunday Adeyemo smiling, seated at a desk in a white kaftan and green patterned cap, with the Nigerian flag behind him',
+      // Anchored to the bottom (client's choice) so the desk shows; this crops
+      // out the photographer's watermark at the top right on the page
+      position: '50% 100%',
     },
   },
 

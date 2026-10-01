@@ -46,6 +46,7 @@ export default function Gallery() {
     setVisible(pageSize);
   };
 
+  // Grid tiles open the viewer on the whole filtered list, so it can step past the loaded items
   const openIn = (items: GalleryItem[]) => (index: number) => setLightbox({ items, index });
 
   return (
@@ -95,7 +96,7 @@ export default function Gallery() {
 
           <div className="mt-6 lg:mt-8">
             {filtered.length > 0 ? (
-              <GalleryGrid items={shown} onOpen={openIn(shown)} />
+              <GalleryGrid items={shown} onOpen={openIn(filtered)} />
             ) : (
               <p className="rounded-card border border-border bg-background px-6 py-14 text-center text-muted">
                 {emptyMessage}

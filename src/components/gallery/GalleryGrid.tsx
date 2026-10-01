@@ -19,7 +19,8 @@ export function GalleryGrid({ items, onOpen }: GalleryGridProps) {
   return (
     <ul className="grid gap-4 md:grid-cols-2 lg:grid-flow-dense lg:auto-rows-[12.5rem] lg:grid-cols-4 lg:gap-5 xl:auto-rows-[14rem]">
       {items.map((item, i) => {
-        const large = i % GROUP === 0;
+        // Large only when a full group follows, so a short last row never leaves a gap
+        const large = i % GROUP === 0 && items.length - i >= GROUP;
         const rightSide = Math.floor(i / GROUP) % 2 === 1;
         return (
           <li

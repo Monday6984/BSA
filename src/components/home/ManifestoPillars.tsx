@@ -97,7 +97,7 @@ function VisionBand() {
 
   return (
     <div className="relative -mt-10 pt-24 pb-8 sm:pt-28 lg:-mt-16 lg:pt-32 lg:pb-7">
-      {/* Mirrored to match the mockup (tower on the left); fades up into the section */}
+      {/* Real aerial photo, so never mirrored; fades up into the section */}
       <img
         src={city.src}
         srcSet={city.srcSet}
@@ -107,7 +107,7 @@ function VisionBand() {
         height={city.height}
         loading="lazy"
         decoding="async"
-        className="absolute inset-0 size-full -scale-x-100 mask-t-from-55% mask-t-to-95% object-cover object-[50%_28%]"
+        className="absolute inset-0 size-full mask-t-from-55% mask-t-to-95% object-cover object-[50%_28%]"
       />
 
       <Container className="relative">

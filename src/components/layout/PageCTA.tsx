@@ -38,7 +38,7 @@ const defaults = {
     'Be part of a people-driven movement for better opportunities, stronger communities and a brighter future.',
   buttonText: 'Join the Movement',
   buttonHref: '/join-the-movement',
-  image: { ...assets.community, alt: '' },
+  image: { ...assets.community, alt: '' } as ImageAsset,
   imagePosition: '70% 40%',
   id: 'page-cta',
   className: 'py-14 lg:py-16',

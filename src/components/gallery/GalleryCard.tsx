@@ -30,6 +30,7 @@ export function GalleryCard({
   const thumb = thumbnailFor(item);
   const video = item.type === 'video';
   const feature = variant === 'feature';
+  const contain = item.type === 'image' && item.fit === 'contain';
 
   return (
     <button
@@ -50,13 +51,18 @@ export function GalleryCard({
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : undefined}
         decoding="async"
-        className="size-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+        className={cn(
+          'size-full transition-transform duration-300 ease-out group-hover:scale-[1.03]',
+          contain ? 'object-contain' : 'object-cover',
+        )}
         style={{ objectPosition: thumb.position }}
       />
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 bg-linear-to-t from-navy/85 via-navy/15 via-45% to-transparent transition-opacity duration-200 group-hover:opacity-90"
-      />
+      {!contain && (
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-t from-navy/85 via-navy/15 via-45% to-transparent transition-opacity duration-200 group-hover:opacity-90"
+        />
+      )}
 
       {video && (
         <span
@@ -70,7 +76,21 @@ export function GalleryCard({
         </span>
       )}
 
-      <span className={cn('absolute inset-x-0 bottom-0', feature ? 'p-5 sm:p-8' : 'p-4 sm:p-5')}>
+      {/* Fitted images (flyers) carry their own headline: show a small label and keep the title for screen readers */}
+      {contain && (
+        <span
+          aria-hidden="true"
+          className="absolute top-3 left-3 rounded-button bg-navy/90 px-2.5 py-1 eyebrow text-[0.6875rem] text-gold"
+        >
+          {metaLine(item)}
+        </span>
+      )}
+      <span
+        className={cn(
+          contain ? 'sr-only' : 'absolute inset-x-0 bottom-0',
+          !contain && (feature ? 'p-5 sm:p-8' : 'p-4 sm:p-5'),
+        )}
+      >
         <span className="block eyebrow text-[0.6875rem] text-gold sm:text-eyebrow">
           {metaLine(item)}
         </span>

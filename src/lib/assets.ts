@@ -29,6 +29,25 @@ export const assets = {
       height: 1800,
       srcSet: optimizedSrcSet('booda-sunday-adeyemo-white', [480, 800, 1200]),
     },
+    /** 2026 Independence shoot; web copies in /portraits (see scripts/optimize-images.mjs) */
+    independenceCutout: {
+      // Transparent cut-out, sky-blue kaftan (About hero)
+      src: '/assets/images/portraits/independence-2026-23.png',
+      width: 1056,
+      height: 1490,
+      srcSet: [480, 800, 1056]
+        .map((w) => `/assets/images/portraits/independence-2026-23-${w}.webp ${w}w`)
+        .join(', '),
+    },
+    independenceDesk: {
+      // Seated at a desk with the Nigerian flag; photographer watermark top right
+      src: '/assets/images/portraits/independence-2026-12.jpg',
+      width: 1400,
+      height: 2026,
+      srcSet: [640, 1000, 1400]
+        .map((w) => `/assets/images/portraits/independence-2026-12-${w}.webp ${w}w`)
+        .join(', '),
+    },
   },
   video: {
     // H.264 High + AAC, 1280×720 (16:9), 1:54, moov at start (streams progressively)
@@ -105,17 +124,25 @@ export const assets = {
       srcSet: optimizedSrcSet('support-the-campaign', [480, 768, 1024]),
     },
   },
+  lautechGate: {
+    // LAUTECH front gate, Ogbomoso. Supplied at 547×365 (soft when shown large)
+    src: '/assets/images/LAUTECH%20front%20gate.jpg',
+    width: 547,
+    height: 365,
+  },
   community: {
     // Ogbomoso hillside landscape, used by the site-wide PageCTA
-    src: '/assets/images/ogbomosho-community.png',
-    width: 1774,
-    height: 887,
-    srcSet: optimizedSrcSet('ogbomosho-community', [640, 1000, 1400]),
+    // Aerial view over Ogbomoso. Supplied at 576×324 (soft when shown large);
+    // no resized copies: a WebP version came out larger than this JPEG
+    src: '/assets/images/Ogbomosho-community-view.jpg',
+    width: 576,
+    height: 324,
   },
   cityscape: {
-    src: '/assets/images/ogbomosho-cityscape-background.png',
-    width: 1774,
-    height: 887,
-    srcSet: optimizedSrcSet('ogbomosho-cityscape-background', [900, 1400, 1774]),
+    // Aerial view of an Ogbomoso road junction. Supplied at 1024×576
+    src: '/assets/images/ogbomosho-city-view.jpg',
+    width: 1024,
+    height: 576,
+    srcSet: optimizedSrcSet('ogbomosho-city-view', [640, 1024]),
   },
 } as const;

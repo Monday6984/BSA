@@ -122,8 +122,9 @@ interface StorySplitProps {
   eyebrow: string;
   heading: string;
   paragraphs: readonly string[];
-  image: ImageAsset;
-  /** Portrait photos use a taller frame */
+  /** `position` is a CSS object-position for the crop */
+  image: ImageAsset & { position?: string };
+  /** Portrait photos use a taller 4:5 frame at every width */
   imageAspect?: 'landscape' | 'portrait';
   tone?: 'white' | 'soft';
 }
@@ -158,7 +159,7 @@ export function StorySplit({
         <div
           className={cn(
             'overflow-hidden rounded-card border border-border',
-            imageAspect === 'portrait' ? 'aspect-4/5 lg:aspect-[5/5.2]' : 'aspect-[4/3]',
+            imageAspect === 'portrait' ? 'aspect-4/5' : 'aspect-[4/3]',
           )}
         >
           <img
@@ -171,6 +172,7 @@ export function StorySplit({
             loading="lazy"
             decoding="async"
             className="size-full object-cover"
+            style={{ objectPosition: image.position }}
           />
         </div>
       </Container>

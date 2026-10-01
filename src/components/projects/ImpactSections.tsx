@@ -19,8 +19,8 @@ function RuledHeading({ id, children }: { id: string; children: string }) {
 /* -------------------------------------------------------------------------- */
 
 /**
- * One category: heading, then three project cards. A touch-scrollable row on
- * mobile (the scroll stays inside the row), three across from md.
+ * One category: heading, then its project cards. A touch-scrollable row on
+ * mobile (the scroll stays inside the row), three across (wrapping) from md.
  */
 export function ProjectCategory({
   category,
@@ -80,7 +80,7 @@ function ProjectCard({ project }: { project: ImpactProject }) {
       <h3 className="mt-4 font-sans text-base leading-snug font-semibold tracking-normal sm:text-[1.0625rem]">
         {title}
       </h3>
-      <p className="mt-1 text-sm leading-relaxed text-muted">{caption}</p>
+      {caption && <p className="mt-1 text-sm leading-relaxed text-muted">{caption}</p>}
     </li>
   );
 }

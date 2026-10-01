@@ -1,4 +1,5 @@
 import { assets } from '@/lib/assets';
+import { projectPhoto } from '@/lib/projectPhotos';
 import type { ImageAsset, Project, ProjectCategory } from '@/types/content';
 
 export const projectCategoryLabels: Record<ProjectCategory, string> = {
@@ -97,7 +98,8 @@ export const onTheGround = {
 export interface ImpactProject {
   id: string;
   title: string;
-  caption: string;
+  /** Short line under the title; leave out until the campaign supplies one */
+  caption?: string;
   /** Omitted until the campaign supplies the matching photograph */
   image?: ImageAsset & { position?: string };
 }
@@ -109,10 +111,9 @@ export interface ImpactCategory {
 }
 
 /**
- * Community Impact (/projects) page. All copy supplied and approved by the
- * campaign; do not rewrite or add figures. Photos marked TEMPORARY are
- * stand-ins from the existing library (client to supply the real ones); their
- * alt text describes what the photo shows, not the named project.
+ * Community Impact (/projects) page. Project titles supplied by the campaign;
+ * do not rewrite them or add captions, dates or figures without approval.
+ * Alt text describes what each photo shows.
  */
 export const projectsPage = {
   seo: {
@@ -139,37 +140,21 @@ export const projectsPage = {
       heading: 'Water & Boreholes',
       projects: [
         {
-          id: 'isale-afon-borehole',
-          title: 'Isale-Afon borehole',
-          caption: 'Isale-Afon borehole, now serving over 3,000 residents',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.projects.campaign,
-            alt: 'Booda Sunday Adeyemo speaking through a megaphone at a BSA Foundation borehole commissioning',
-            position: '55% 30%',
-          },
+          id: 'ojude-ajaawa-borehole',
+          title: 'Commissioning of Ojude Ajaawa Borehole',
+          image: projectPhoto(
+            'borehole-ojude-ajaawa',
+            'Residents gathered along a street in Ojude Ajaawa for the borehole commissioning',
+          ),
         },
         {
-          id: 'borehole-renovation',
-          title: 'Borehole renovation',
-          caption: 'Renovation of an abandoned borehole in Ogbomoso South',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.projects.communityOutreach,
-            alt: 'Women from the community seated together at a community outreach gathering',
-            position: '50% 55%',
-          },
-        },
-        {
-          id: 'community-water-point',
-          title: 'Community water point',
-          caption: 'A community water point, before and after.',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.community,
-            alt: 'A view over Ogbomoso rooftops towards a rocky hill at sunset',
-            position: '50% 60%',
-          },
+          id: 'akunko-junction-isoko-borehole',
+          title: 'BSA Borehole Commissioning Akunko Junction Isoko',
+          image: projectPhoto(
+            'borehole-akunko-junction-isoko',
+            'Residents gathered in front of a borehole with two water tanks, marked as renovated by the Booda Sunday Adeyemo Foundation',
+            '50% 30%',
+          ),
         },
       ],
     },
@@ -178,37 +163,36 @@ export const projectsPage = {
       heading: 'Roads, Drainage & Bus Stops',
       projects: [
         {
-          id: 'drainage-construction',
-          title: 'Drainage construction',
-          caption: 'Drainage construction to stop seasonal flooding',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.cityscape,
-            alt: 'Roads and a roundabout around a landmark tower in Ogbomoso',
-            position: '75% 70%',
-          },
+          id: 'okada-bus-stop-seminary',
+          title: 'BSA Construction of Okada Bustop Seminary',
+          image: projectPhoto(
+            'okada-bus-stop-seminary',
+            'A roadside okada shelter with a BSA sign, with people seated and standing beneath it',
+          ),
         },
         {
-          id: 'okada-shelter',
-          title: 'Okada shelter',
-          caption: 'Okada shelter built for a busy junction',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.projects.communityOutreach2,
-            alt: 'Residents gathered outdoors listening to a speaker',
-            position: '50% 25%',
-          },
+          id: 'okada-bus-stop-baptist-high-school',
+          title: 'Baptist High-school Construction of Okada Bustop',
+          image: projectPhoto(
+            'okada-bus-stop-baptist-high-school',
+            'An okada shelter with benches and BSA signs, its roof marked as constructed by the Booda Sunday Adeyemo Foundation',
+          ),
         },
         {
-          id: 'modern-bus-stop',
-          title: 'Modern bus stop',
-          caption: 'One of the modern bus stops now serving Ogbomoso South',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.community,
-            alt: 'A view over Ogbomoso rooftops towards a rocky hill at sunset',
-            position: '50% 60%',
-          },
+          id: 'arowomole-bus-stop',
+          title: 'Commissioning of BSA Arowomole Bus Stop',
+          image: projectPhoto(
+            'bus-stop-arowomole',
+            'Residents gathered at the commissioning of the BSA Arowomole Bus Stop',
+          ),
+        },
+        {
+          id: 'oluwatedo-drainage',
+          title: 'BSA Oluwatedo Community Drainage',
+          image: projectPhoto(
+            'drainage-oluwatedo',
+            'A concrete drainage channel running alongside a wall and an unpaved road',
+          ),
         },
       ],
     },
@@ -217,37 +201,29 @@ export const projectsPage = {
       heading: 'Youth Empowerment & Skills',
       projects: [
         {
-          id: 'vocational-training',
-          title: 'Vocational training',
-          caption: 'Vocational training cohort, now running their own trades',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.projects.classroom,
-            alt: 'A teacher addressing a classroom of students with open textbooks',
-            position: '40% 45%',
-          },
+          id: 'summit-beyond-limits',
+          title: 'BSA Capacity Building Summit Beyond Limits',
+          image: projectPhoto(
+            'summit-beyond-limits',
+            'A speaker on stage at the Capacity Building Summit, with Beyond Limits signage behind',
+            '50% 35%',
+          ),
         },
         {
-          id: 'small-business-empowerment',
-          title: 'Small business empowerment',
-          caption: 'Small business empowerment for local traders',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.projects.communityOutreach,
-            alt: 'Women from the community seated together at a community outreach gathering',
-            position: '50% 55%',
-          },
+          id: 'majokosile-graduation',
+          title: 'BSA Majokosile Graduation',
+          image: projectPhoto(
+            'majokosile-graduation',
+            'Women arranging handbags on a table at the Majokosile graduation',
+          ),
         },
         {
-          id: 'market-union-meeting',
-          title: 'Market union meeting',
-          caption: 'Meeting with a market union on trade support',
-          // TEMPORARY stand-in photo: replace with the actual project photograph
-          image: {
-            ...assets.projects.communityOutreach2,
-            alt: 'Residents gathered outdoors listening to a speaker',
-            position: '50% 25%',
-          },
+          id: 'bike-riders-akomoran-empowerment',
+          title: 'BSA Bike Riders Akomoran Empowerment',
+          image: projectPhoto(
+            'bike-riders-akomoran-empowerment',
+            'Men standing beside a new motorcycle during the bike riders empowerment',
+          ),
         },
       ],
     },
@@ -256,34 +232,94 @@ export const projectsPage = {
       heading: 'Education & Scholarships',
       projects: [
         {
-          id: 'cash-gift-to-students',
-          title: 'Cash gift to students',
-          caption: '120 WASSCE scholarship forms distributed to indigent students',
-          image: {
-            ...assets.projects.cashGift,
-            alt: 'Booda Sunday Adeyemo presenting a BSA Foundation scholarship cheque to a student',
-            position: '30% 40%',
-          },
+          id: 'jamb-scholarship-2025',
+          title: '2025 BSA Jamb Scholarship',
+          image: projectPhoto(
+            'jamb-scholarship-2025',
+            'A speaker with a microphone addressing students in a classroom at the 2025 JAMB scholarship orientation',
+          ),
         },
         {
-          id: 'waec-jamb-prep',
-          title: 'WAEC and JAMB prep',
-          caption: 'Seven-month WAEC and JAMB preparation programme',
-          image: {
-            ...assets.projects.classroom2,
-            alt: 'Students in school uniform working through exam papers at their desks',
-            position: '50% 40%',
-          },
+          id: 'jamb-scholarship-2024',
+          title: '2024 BSA Jamb Scholarship',
+          image: projectPhoto(
+            'jamb-scholarship-2024',
+            'A large group of students and guests holding up their scholarship certificates in a hall',
+          ),
         },
         {
-          id: 'trained-teachers',
-          title: 'Trained teachers',
-          caption: 'Trained teachers delivering the academic empowerment programme',
-          image: {
-            ...assets.projects.classroom,
-            alt: 'A teacher addressing a classroom of students with open textbooks',
-            position: '40% 45%',
-          },
+          id: 'jamb-scholarship-2023',
+          title: '2023 BSA Jamb Scholarship',
+          image: projectPhoto(
+            'jamb-scholarship-2023',
+            'A student receiving a scholarship certificate from two men, one in a BSA T-shirt',
+            '50% 30%',
+          ),
+        },
+      ],
+    },
+    {
+      id: 'health-community-support',
+      heading: 'Health & Community Support',
+      projects: [
+        {
+          id: 'eye-treatment-okada-riders',
+          title: 'BSA Free Medical Eye Treatment for Okada Riders',
+          image: projectPhoto(
+            'eye-treatment-okada-riders',
+            'A man in trial frames reading a vision test chart at the free eye treatment',
+          ),
+        },
+        {
+          id: 'operation-feed-the-needy',
+          title: 'BSA Operation Feed the Needy',
+          image: projectPhoto(
+            'operation-feed-the-needy',
+            'A ribbon-cutting behind a row of food bags at Operation Feed the Needy',
+            '50% 40%',
+          ),
+        },
+        {
+          id: 'less-privileged',
+          title: 'BSA to the Less Privilege',
+          image: projectPhoto(
+            'less-privileged',
+            'A smiling young man holding up a BSA bag beside sacks of food',
+          ),
+        },
+        {
+          id: 'widows-cash-empowerment',
+          title: 'BSA Widows Cash Empowerment',
+          image: projectPhoto(
+            'widows-cash-empowerment',
+            'Women seated together in a hall at the widows cash empowerment',
+          ),
+        },
+        {
+          id: 'christmas-love-extension',
+          title: 'BSA Christmas Love Extension',
+          image: projectPhoto(
+            'christmas-love-extension',
+            'A man in a BSA jacket speaking into a microphone beside rows of gift bags',
+            '50% 30%',
+          ),
+        },
+        {
+          id: 'christmas-love-sharing-2022',
+          title: 'BSA Christmas Love Sharing 2022',
+          image: projectPhoto(
+            'christmas-love-sharing-2022',
+            'A large crowd of residents gathered in a school compound for Christmas Love Sharing',
+          ),
+        },
+        {
+          id: 'covid-19-palliatives',
+          title: 'Palliative for Ogbomosho South During Covid 19',
+          image: projectPhoto(
+            'covid-19-palliatives',
+            'A masked volunteer handing a relief package to a woman during the COVID-19 palliative distribution',
+            '50% 35%',
+          ),
         },
       ],
     },

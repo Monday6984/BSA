@@ -9,3 +9,6 @@ dist-ssr
 .DS_Store
 .vscode/*
 !.vscode/extensions.json
+
+# Full-size original photos (kept locally; web copies are generated into public/)
+assets-source/

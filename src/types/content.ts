@@ -93,6 +93,8 @@ export interface GalleryPhoto extends GalleryItemBase {
   type: 'image';
   /** Local asset; alt text is required. `position` is a CSS object-position for the crop. */
   image: ImageAsset & { position?: string };
+  /** 'contain' shows the whole image in its tile (e.g. flyers) instead of cropping it */
+  fit?: 'cover' | 'contain';
 }
 
 export interface GalleryVideo extends GalleryItemBase {
