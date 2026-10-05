@@ -35,12 +35,12 @@ export const socialLinks: SocialLink[] = [];
 
 /**
  * Official donation account: the single source of truth for bank details.
- * PENDING — placeholders until the campaign supplies the real account.
+ * Supplied and confirmed (exact bank-registered name) by the campaign, 5 October 2026.
  */
 export const donationAccount = {
-  bankName: '[BANK NAME]',
-  accountName: '[ACCOUNT NAME]',
-  accountNumber: '[ACCOUNT NUMBER]',
+  bankName: 'Zenith Bank',
+  accountName: 'SUNDAY JEREMIAH_CAMPAIGN ACCOUNT',
+  accountNumber: '1244219463',
 } as const;
 
 /**
